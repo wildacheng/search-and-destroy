@@ -1,35 +1,30 @@
-'use strict';
+"use strict";
 
 // Complete this algo
+// eslint-disable-next-line complexity
 const binarySearch = (array, target) => {
-	if (!target || !array) {
+  if (!target || !array) {
+    return false;
+  }
+  let midPoint = Math.floor(array.length / 2); // root
+  let firstHalf = array.slice(0, midPoint); // left side with lower numbers
+  let secondHalf = array.slice(midPoint); // right side with higher numbers
+
+	console.log(array, "HELLO")
+	console.log(array[midPoint] === target)
+	if (target === array[midPoint]) {
+		return true
+	}
+
+	if (array.length === 1){
 		return false
 	}
-	let midPoint = Math.floor(array.length / 2) // root
-	let firstHalf = array.slice(0, midPoint) // left side with lower numbers
-	let secondHalf = array.slice(midPoint) // right side with higher numbers
-
-	// console.log('firstHalf ',firstHalf)
-	// console.log('secondHalf ', secondHalf)
-
-	if (target < midPoint) {
-		for (let i = 0; i < firstHalf.length; i++) {
-			if (firstHalf[i] === target) {
-				return true
-			} else {
-				return false
-			}
-		}
-
-	} else { // else if (target > midPoint)
-		for (let i = 0; i < secondHalf.length; i++) {
-			if (secondHalf[i] === target) {
-				return true
-			} else {
-				return false
-			}
-		}
+	if (target < array[midPoint]) {
+		return binarySearch(firstHalf, target);
+	} else if (target > array[midPoint]) {
+		return binarySearch(secondHalf, target);
 	}
+
 
 };
 
@@ -42,7 +37,7 @@ const binarySearch = (array, target) => {
 
 */
 
-module.exports = binarySearch
+module.exports = binarySearch;
 
 //COMMENTS
 //Should run in  O(log(n)) time! aka while loop
